@@ -1,5 +1,5 @@
 import tempfile
-
+import gc
 from flask import Flask, jsonify, request
 import torch
 from langchain_community.chat_models import ChatOpenAI
@@ -16,16 +16,7 @@ from langchain.document_loaders import TextLoader
 from langchain_chroma import Chroma
 
 embedding_function = SentenceTransformerEmbeddings(
-    model_name="Qwen/Qwen3-Embedding-0.6B",
-    model_kwargs={
-        "device": "cuda",                # GPU
-        "trust_remote_code": True,       # Needed for some HF models like Qwen
-        "torch_dtype": torch.float16     # Half precision
-    },
-    encode_kwargs={
-        "normalize_embeddings": True,    # L2-normalize vectors
-        "batch_size": 32                  # Larger batches for speed
-    }
+    model_name="Qwen/Qwen3-Embedding-0.6B"
 )
 
 app = Flask(__name__)
@@ -138,7 +129,7 @@ def query_vector_db():
 
         # Run query
         answer = rag_chain.invoke(question)
-        import gc, torch
+
         del rag_chain, retriever, vectorstore, llm, prompt
         gc.collect()
         if torch.cuda.is_available():
