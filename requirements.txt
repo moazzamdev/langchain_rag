@@ -4,3 +4,4 @@ langchain-chroma
 flask
 sentence-transformers
 langchain-huggingface
+openai

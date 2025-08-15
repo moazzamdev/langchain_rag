@@ -138,7 +138,11 @@ def query_vector_db():
 
         # Run query
         answer = rag_chain.invoke(question)
-
+        import gc, torch
+        del rag_chain, retriever, vectorstore, llm, prompt
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         return jsonify({
             "log_id": log_id,
             "query": question,
