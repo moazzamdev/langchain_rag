@@ -70,10 +70,12 @@ def file_upload():
             embedding=embedding_function,
             persist_directory="./chroma_db"
         )
-
+        del loader, documents, text_splitter, splits
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         return jsonify({
             "log_id": log_id,
-            "total_chunks": len(splits),
             "collection_created":collection_name,
             "status": "success"
         })
