@@ -112,7 +112,10 @@ def query_vector_db():
         )
 
         # Prompt template
-        template = """Answer the question based only on the following context:
+        template = """
+        When the user asks about the "patient", always interpret it as the "subscriber" and answer using subscriber details from the context.
+If the information is not in the context, state that it is unavailable and never invent data.
+        Answer the question based only on the following context:
         {context}
         Question: {question}
         Answer: """
