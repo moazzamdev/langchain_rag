@@ -1,3 +1,6 @@
 torch
 langchain-community
 langchain-chroma
+flask
+sentence-transformers
+langchain-huggingface
