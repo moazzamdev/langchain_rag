@@ -144,7 +144,7 @@ If the information is not in the context, state that it is unavailable and never
         return jsonify({
             "log_id": log_id,
             "query": question,
-            "answer": answer
+            "answer": final_message
         })
 
     except Exception as e:
