@@ -105,7 +105,7 @@ def query_vector_db():
 
         # LLM config
         llm = ChatOpenAI(
-            base_url="https://64w05lx5gu70lf-8000.proxy.runpod.net/v1",   # llama.cpp server
+            base_url="https://yykofxr8k5k5ic-8000.proxy.runpod.net/v1",   # llama.cpp server
             api_key="389e5f28-62d0-46c6-9cbc-0099da90ff30",
             model="granite-3.3-8b-instruct",
             temperature=0,
