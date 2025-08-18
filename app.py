@@ -11,6 +11,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from typing import List
 from langchain_core.documents import Document
+import re
 import os
 from langchain.document_loaders import TextLoader
 from langchain_chroma import Chroma
@@ -114,7 +115,7 @@ def query_vector_db():
         # Prompt template
         template = """
         When the user asks about the "patient", always interpret it as the "subscriber" and answer using subscriber details from the context.
-If the information is not in the context, state that it is unavailable and never invent data.
+If the information is not in the context, state that it is unavailable and never invent data dont be too long be shorter that human can understand.
         Answer the question based only on the following context:
         {context}
         Question: {question}
@@ -134,7 +135,8 @@ If the information is not in the context, state that it is unavailable and never
 
         # Run query
         answer = rag_chain.invoke(question)
-
+        match = re.findall(r"<\|message\|>(.*?)$", answer, re.DOTALL)
+        final_message = match[-1].strip() if match else answer
         del rag_chain, retriever, vectorstore, llm, prompt
         gc.collect()
         if torch.cuda.is_available():
