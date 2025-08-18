@@ -135,8 +135,8 @@ If the information is not in the context, state that it is unavailable and never
 
         # Run query
         answer = rag_chain.invoke(question)
-        match = re.findall(r"<\|message\|>(.*?)$", answer, re.DOTALL)
-        final_message = match[-1].strip() if match else answer
+
+        final_message = re.search(r"<\|start\|>assistant<\|channel\|>final<\|message\|>(.*)", answer, re.DOTALL).group(1).strip()
         del rag_chain, retriever, vectorstore, llm, prompt
         gc.collect()
         if torch.cuda.is_available():
