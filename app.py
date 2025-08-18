@@ -114,12 +114,16 @@ def query_vector_db():
 
         # Prompt template
         template = """
-        When the user asks about the "patient", always interpret it as the "subscriber" and answer using subscriber details from the context.
-If the information is not in the context, state that it is unavailable and never invent data dont be too long be shorter that human can understand.
-        Answer the question based only on the following context:
-        {context}
-        Question: {question}
-        Answer: """
+        When the user asks about the "patient", always interpret it as the "subscriber" and answer using subscriber details from the context.  
+If the information is not in the context, state that it is unavailable and never invent data.  
+Be concise and human-friendly: instead of giving only a bare value, phrase the answer naturally with a little detail.  
+For example, if the user asks "What is the name of the patient?" and the context says David Joe, respond with "The name of the patient is David Joe" instead of just "David Joe."  
+
+Answer the question based only on the following context:  
+{context}  
+Question: {question}  
+Answer:
+"""
         prompt = ChatPromptTemplate.from_template(template)
 
         def docs2str(docs):
