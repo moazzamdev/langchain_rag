@@ -54,8 +54,8 @@ def file_upload():
 
         # Split document into chunks
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=3000,
-            chunk_overlap=200,
+            chunk_size=1500,
+            chunk_overlap=100,
             length_function=len
         )
         splits = text_splitter.split_documents(documents)
@@ -107,8 +107,8 @@ def query_vector_db():
         llm = ChatOpenAI(
             base_url="https://yykofxr8k5k5ic-8000.proxy.runpod.net/v1",   # llama.cpp server
             api_key="389e5f28-62d0-46c6-9cbc-0099da90ff30",
-            model="granite-3.3-8b-instruct",
-            temperature=0,
+            model="gpt_oss_20b",
+            temperature=1,
         )
 
         # Prompt template
