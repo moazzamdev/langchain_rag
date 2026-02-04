@@ -2,6 +2,7 @@ torch
 langchain-community
 langchain-chroma
 flask
+pycone
 sentence-transformers
 langchain-huggingface
 openai
