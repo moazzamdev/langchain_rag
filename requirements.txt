@@ -6,3 +6,4 @@ pycone
 sentence-transformers
 langchain-huggingface
 openai
+apscheduler
