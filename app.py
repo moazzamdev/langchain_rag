@@ -26,6 +26,7 @@ app = Flask(__name__)
 # Home page
 @app.route("/")
 def home():
+    print()
     return "<h1>Welcome to RAG App</h1>"
 
 @app.route("/api/file_upload", methods=["POST"])
